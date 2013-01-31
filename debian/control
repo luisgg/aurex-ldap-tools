@@ -1,0 +1,13 @@
+Source: aurex-ldap-tools
+Section: admin
+Priority: optional
+Maintainer: Luis Antonio Garcia Gisbert <luisgg@gmail.com>
+Build-Depends: debhelper (>= 7.0)
+Standards-Version: 3.9.3
+
+Package: aurex-ldap-tools
+Architecture: all
+Depends: ${misc:Depends}, ldap-utils
+Description: useful ldap scripts
+ Just a collection of useful scripts to 'hack ldap' in aurex network
+ environment.

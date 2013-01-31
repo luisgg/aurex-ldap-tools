@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# -------
+# File:        aul-fixmail
+# Description: manage papercut printers
+# Author:      Luis Antonio Garcia Gisbert <luisgg@gmail.com> 
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along 
+# with this program; if not, write to the Free Software Foundation, Inc., 
+# 51 Franklin St, Fifth Floor, Boston MA 02110-1301 USA
+# --------
+
+die(){
+	echo "$1" >&2
+	exit 1
+}
+
+usage(){
+	die "Usage: $(basename "$0") {group GROUPNAME | user USERNAME}"
+}
+
+test_group(){
+}
+
+test_user(){
+}
+
+fixmail_group(){
+}
+
+fixmail_user(){
+}
+
+[ -r /etc/aurex-ldap-tools/aurex-ldap-tools.conf ] || die "ERROR: Unable to read configuration file /etc/aurex-ldap-tools/aurex-ldap-tools.conf"
+
+ACTION="$1"
+rc=0
+case "$ACTION" in
+	group)
+		[ "$2" ] || usage
+		test_group "$2" || die "ERROR: $2 is not a valid ldap group"
+		fixmail_group "$2" || rc=$?
+		;;
+	user)
+		[ "$2" ] || usage
+		test_user "$2" || die "ERROR: $2 is not a valid ldap user"
+		fixmail_user "$2" || rc=$?
+		;;
+	*)
+		usage
+		;;
+esac
+
+exit $rc
+
+	
